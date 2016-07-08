@@ -12,6 +12,10 @@
 		709A705E1D2EFD3A002B2B4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 709A705C1D2EFD3A002B2B4D /* Main.storyboard */; };
 		709A70601D2EFD3A002B2B4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 709A705F1D2EFD3A002B2B4D /* Assets.xcassets */; };
 		709A70631D2EFD3A002B2B4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 709A70611D2EFD3A002B2B4D /* LaunchScreen.storyboard */; };
+		709A706B1D2EFF7C002B2B4D /* SlothieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A706A1D2EFF7C002B2B4D /* SlothieCell.swift */; };
+		709A706D1D2F0152002B2B4D /* Slothie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A706C1D2F0152002B2B4D /* Slothie.swift */; };
+		709A70741D2F26DF002B2B4D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A70731D2F26DF002B2B4D /* Constants.swift */; };
+		709A70761D2F26F8002B2B4D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A70751D2F26F8002B2B4D /* DataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		709A705F1D2EFD3A002B2B4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		709A70621D2EFD3A002B2B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		709A70641D2EFD3A002B2B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		709A706A1D2EFF7C002B2B4D /* SlothieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlothieCell.swift; sourceTree = "<group>"; };
+		709A706C1D2F0152002B2B4D /* Slothie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slothie.swift; sourceTree = "<group>"; };
+		709A70731D2F26DF002B2B4D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		709A70751D2F26F8002B2B4D /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +62,58 @@
 		709A70571D2EFD3A002B2B4D /* Slothie */ = {
 			isa = PBXGroup;
 			children = (
+				709A70721D2F26C6002B2B4D /* Utilities */,
+				709A70711D2F26BE002B2B4D /* Services */,
+				709A70701D2F0165002B2B4D /* Model */,
+				709A706F1D2F015F002B2B4D /* View */,
+				709A706E1D2F0158002B2B4D /* Controller */,
 				709A70581D2EFD3A002B2B4D /* AppDelegate.swift */,
-				709A705A1D2EFD3A002B2B4D /* ViewController.swift */,
-				709A705C1D2EFD3A002B2B4D /* Main.storyboard */,
 				709A705F1D2EFD3A002B2B4D /* Assets.xcassets */,
-				709A70611D2EFD3A002B2B4D /* LaunchScreen.storyboard */,
 				709A70641D2EFD3A002B2B4D /* Info.plist */,
 			);
 			path = Slothie;
+			sourceTree = "<group>";
+		};
+		709A706E1D2F0158002B2B4D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				709A705A1D2EFD3A002B2B4D /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		709A706F1D2F015F002B2B4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				709A70611D2EFD3A002B2B4D /* LaunchScreen.storyboard */,
+				709A705C1D2EFD3A002B2B4D /* Main.storyboard */,
+				709A706A1D2EFF7C002B2B4D /* SlothieCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		709A70701D2F0165002B2B4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				709A706C1D2F0152002B2B4D /* Slothie.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		709A70711D2F26BE002B2B4D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				709A70751D2F26F8002B2B4D /* DataService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		709A70721D2F26C6002B2B4D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				709A70731D2F26DF002B2B4D /* Constants.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +148,7 @@
 				TargetAttributes = {
 					709A70541D2EFD3A002B2B4D = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = WRD8ABT3AF;
 					};
 				};
 			};
@@ -135,7 +188,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				709A70741D2F26DF002B2B4D /* Constants.swift in Sources */,
+				709A706D1D2F0152002B2B4D /* Slothie.swift in Sources */,
 				709A705B1D2EFD3A002B2B4D /* ViewController.swift in Sources */,
+				709A70761D2F26F8002B2B4D /* DataService.swift in Sources */,
+				709A706B1D2EFF7C002B2B4D /* SlothieCell.swift in Sources */,
 				709A70591D2EFD3A002B2B4D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Slothie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxpeiros.Slothie;
@@ -260,6 +318,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Slothie/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxpeiros.Slothie;
