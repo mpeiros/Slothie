@@ -8,5 +8,9 @@
 
 import Foundation
 
+// Keys
 let KEY_SLOTHIES = "slothies"
 let KEY_IMAGE_PATH = "imagePath"
+
+// Segues
+let SEGUE_SHOW_SLOTHIE_VC = "ShowSlothieVC"

@@ -15,15 +15,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(takeSlothie))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: #selector(takeSlothie))
         
         DataService.instance.loadSlothies()
     }
     
     func takeSlothie() {
         let picker = UIImagePickerController()
-        picker.allowsEditing = true
+        
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            picker.sourceType = .Camera
+            picker.cameraDevice = .Front
+        } else {
+            picker.sourceType = .PhotoLibrary
+        }
+        
         picker.delegate = self
+        
+        let overlayRect = CGRectMake(0, 100, picker.view.frame.width, 100)
+        let overlayView = UIView.init(frame: overlayRect)
+        overlayView.backgroundColor = UIColor.greenColor()
+        
+        picker.cameraOverlayView = overlayView
+        
         presentViewController(picker, animated: true, completion: nil)
     }
     
@@ -34,9 +48,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         var newImage: UIImage
         
-        if let possibleImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
-            newImage = possibleImage
-        } else if let possibleImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+        if let possibleImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             newImage = possibleImage
         } else {
             return
@@ -67,7 +79,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let slothie = DataService.instance.slothies[indexPath.row]
         
+        performSegueWithIdentifier(SEGUE_SHOW_SLOTHIE_VC, sender: slothie)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SEGUE_SHOW_SLOTHIE_VC {
+            if let slothieVC = segue.destinationViewController as? SlothieVC {
+                if let slothie = sender as? Slothie {
+                    slothieVC.slothieVCSlothie = slothie
+                }
+            }
+        }
     }
     
 }
