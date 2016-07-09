@@ -6,6 +6,64 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--CameraVC-->
+        <scene sceneID="Fqn-uD-FUo">
+            <objects>
+                <viewController id="i1e-7x-Eqe" customClass="CameraVC" customModule="Slothie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4bQ-fc-LIJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="e76-HK-Kca"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="izW-87-Wvz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfG-fE-nnD">
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="1xE-ei-PT7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressTakePhoto:" destination="i1e-7x-Eqe" eventType="touchUpInside" id="vQu-ab-x4N"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="n3w-a4-9aV">
+                                <rect key="frame" x="0.0" y="64" width="600" height="486"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayb-9D-pGs">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="243"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YQ9-aZ-auQ">
+                                        <rect key="frame" x="0.0" y="243" width="600" height="243"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="tfG-fE-nnD" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leading" id="3df-b5-SFu"/>
+                            <constraint firstAttribute="trailing" secondItem="n3w-a4-9aV" secondAttribute="trailing" id="4VT-Eh-NmJ"/>
+                            <constraint firstItem="n3w-a4-9aV" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leading" id="Ch9-8D-taa"/>
+                            <constraint firstAttribute="trailing" secondItem="tfG-fE-nnD" secondAttribute="trailing" id="G9E-g5-3QD"/>
+                            <constraint firstItem="tfG-fE-nnD" firstAttribute="top" secondItem="n3w-a4-9aV" secondAttribute="bottom" id="XrA-zG-nHE"/>
+                            <constraint firstItem="n3w-a4-9aV" firstAttribute="top" secondItem="4bQ-fc-LIJ" secondAttribute="bottom" id="fTf-km-pyw"/>
+                            <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="tfG-fE-nnD" secondAttribute="bottom" id="h7E-SY-3Iw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="capturedImage" destination="YQ9-aZ-auQ" id="Y6O-Xu-OrC"/>
+                        <outlet property="previewView" destination="ayb-9D-pGs" id="AL8-rD-1Gk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SfJ-dm-0Va" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2079" y="466"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -82,6 +140,7 @@
                     <connections>
                         <outlet property="collectionView" destination="Q2p-rB-lNe" id="NEO-6W-7wu"/>
                         <segue destination="26K-GX-f6d" kind="show" identifier="ShowSlothieVC" id="7Iq-jL-8EQ"/>
+                        <segue destination="i1e-7x-Eqe" kind="show" identifier="ShowCameraVC" id="RvE-k3-9qs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

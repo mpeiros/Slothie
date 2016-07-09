@@ -15,9 +15,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: #selector(takeSlothie))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(takeSlothie))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: #selector(showCamera))
         
         DataService.instance.loadSlothies()
+    }
+    
+    func showCamera() {
+        performSegueWithIdentifier(SEGUE_SHOW_CAMERA_VC, sender: nil)
     }
     
     func takeSlothie() {
@@ -31,12 +36,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
         picker.delegate = self
-        
-        let overlayRect = CGRectMake(0, 100, picker.view.frame.width, 100)
-        let overlayView = UIView.init(frame: overlayRect)
-        overlayView.backgroundColor = UIColor.greenColor()
-        
-        picker.cameraOverlayView = overlayView
         
         presentViewController(picker, animated: true, completion: nil)
     }

@@ -14,3 +14,4 @@ let KEY_IMAGE_PATH = "imagePath"
 
 // Segues
 let SEGUE_SHOW_SLOTHIE_VC = "ShowSlothieVC"
+let SEGUE_SHOW_CAMERA_VC = "ShowCameraVC"
