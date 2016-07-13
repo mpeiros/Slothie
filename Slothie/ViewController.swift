@@ -21,6 +21,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         DataService.instance.loadSlothies()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        collectionView.reloadData()
+    }
+    
     func showCamera() {
         performSegueWithIdentifier(SEGUE_SHOW_CAMERA_VC, sender: nil)
     }

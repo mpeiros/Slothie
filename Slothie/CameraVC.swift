@@ -9,14 +9,17 @@
 import UIKit
 import AVFoundation
 
-class CameraVC: UIViewController {
+class CameraVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     @IBOutlet weak var previewView: UIView!
-    @IBOutlet weak var capturedImage: UIImageView!
     
     var captureSession: AVCaptureSession?
     var stillImageOutput: AVCaptureStillImageOutput?
     var previewLayer: AVCaptureVideoPreviewLayer?
+    
+    var slothCALayer: CALayer!
+    var metadataOutput: AVCaptureMetadataOutput?
+    var sessionQueue: dispatch_queue_t = dispatch_queue_create("videoQueue", DISPATCH_QUEUE_SERIAL)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +31,13 @@ class CameraVC: UIViewController {
         captureSession = AVCaptureSession()
         captureSession!.sessionPreset = AVCaptureSessionPresetPhoto
         
-        let backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let frontCamera = cameraWithPosition(.Front)
         
         var error: NSError?
         var input: AVCaptureDeviceInput!
         
         do {
-            input = try AVCaptureDeviceInput(device: backCamera)
+            input = try AVCaptureDeviceInput(device: frontCamera)
         } catch let err as NSError {
             error = err
             input = nil
@@ -47,12 +50,19 @@ class CameraVC: UIViewController {
             stillImageOutput = AVCaptureStillImageOutput()
             stillImageOutput!.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
             
-            if captureSession!.canAddOutput(stillImageOutput) {
+            metadataOutput = AVCaptureMetadataOutput()
+            
+            if captureSession!.canAddOutput(stillImageOutput) && captureSession!.canAddOutput(metadataOutput) {
                 captureSession!.addOutput(stillImageOutput)
+                captureSession!.addOutput(metadataOutput)
+                
+                metadataOutput!.setMetadataObjectsDelegate(self, queue: sessionQueue)
+                metadataOutput!.metadataObjectTypes = [AVMetadataObjectTypeFace]
                 
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                previewLayer!.videoGravity = AVLayerVideoGravityResizeAspect
+                previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
                 previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.Portrait
+                setupSlothFace()
                 previewView.layer.addSublayer(previewLayer!)
                 
                 captureSession!.startRunning()
@@ -65,6 +75,36 @@ class CameraVC: UIViewController {
         previewLayer!.frame = previewView.bounds
     }
     
+    func cameraWithPosition(position: AVCaptureDevicePosition) -> AVCaptureDevice {
+        let devices = AVCaptureDevice.devices()
+        for device in devices {
+            if device.position == position {
+                return device as! AVCaptureDevice
+            }
+        }
+        return AVCaptureDevice()
+    }
+    
+    func setupSlothFace() {
+        slothCALayer = CALayer()
+        slothCALayer.zPosition = 1
+        slothCALayer.contents = UIImage(named: "sloth")!.CGImage
+        slothCALayer.hidden = true
+        previewLayer!.addSublayer(slothCALayer)
+    }
+    
+    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+        
+        for metadataObject in metadataObjects as! [AVMetadataObject] {
+            if metadataObject.type == AVMetadataObjectTypeFace {
+                let transformedMetadataObject = previewLayer!.transformedMetadataObjectForMetadataObject(metadataObject)
+                let face = transformedMetadataObject!.bounds
+                slothCALayer.frame = face
+                slothCALayer.hidden = false
+            }
+        }
+    }
+    
     @IBAction func didPressTakePhoto(sender: UIButton) {
         if let videoConnection = stillImageOutput!.connectionWithMediaType(AVMediaTypeVideo) {
             
@@ -74,12 +114,37 @@ class CameraVC: UIViewController {
                 
                 if (sampleBuffer != nil) {
                     
-                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
-                    let dataProvider = CGDataProviderCreateWithCFData(imageData)
-                    let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+                    let image: UIImage!
                     
-                    let image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
-                    self.capturedImage.image = image
+                    if self.slothCALayer.hidden == false {
+                        UIGraphicsBeginImageContext(self.slothCALayer.bounds.size)
+                        self.slothCALayer.renderInContext(UIGraphicsGetCurrentContext()!)
+                        let slothImage = UIGraphicsGetImageFromCurrentImageContext()
+                        UIGraphicsEndImageContext()
+                        
+                        let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                        let dataProvider = CGDataProviderCreateWithCFData(imageData)
+                        let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+                        let photoImage = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
+                        
+                        UIGraphicsBeginImageContext(self.previewView.bounds.size)
+                        photoImage.drawInRect(CGRect(origin: CGPointZero, size: self.previewView.bounds.size))
+                        slothImage.drawInRect(CGRectMake(self.slothCALayer.frame.minX, self.slothCALayer.frame.minY, self.slothCALayer.bounds.width, self.slothCALayer.bounds.height))
+                        image = UIGraphicsGetImageFromCurrentImageContext()
+                        UIGraphicsEndImageContext()
+                    } else {
+                        let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                        let dataProvider = CGDataProviderCreateWithCFData(imageData)
+                        let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+                        image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
+                    }
+                    
+                    let imgPath = DataService.instance.saveImageAndCreatePath(image)
+                    
+                    let slothie = Slothie(imagePath: imgPath)
+                    DataService.instance.addSlothie(slothie)
+                    
+                    self.captureSession!.stopRunning()
                 }
             })
         }
