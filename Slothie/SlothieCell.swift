@@ -15,8 +15,6 @@ class SlothieCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        slothieImageView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3).CGColor
-        slothieImageView.layer.borderWidth = 1
         slothieImageView.layer.cornerRadius = 3
         layer.cornerRadius = 3
     }

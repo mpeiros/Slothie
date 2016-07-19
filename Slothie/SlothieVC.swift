@@ -16,6 +16,8 @@ class SlothieVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Your Slothie"
 
         slothieVCImageView.image = DataService.instance.imageForPath(slothieVCSlothie.slothieImagePath)
     }

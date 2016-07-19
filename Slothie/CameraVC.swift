@@ -23,6 +23,8 @@ class CameraVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Take a Slothie"
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -114,30 +116,21 @@ class CameraVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                 
                 if (sampleBuffer != nil) {
                     
-                    let image: UIImage!
+                    UIGraphicsBeginImageContext(self.slothCALayer.bounds.size)
+                    self.slothCALayer.renderInContext(UIGraphicsGetCurrentContext()!)
+                    let slothImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
                     
-                    if self.slothCALayer.hidden == false {
-                        UIGraphicsBeginImageContext(self.slothCALayer.bounds.size)
-                        self.slothCALayer.renderInContext(UIGraphicsGetCurrentContext()!)
-                        let slothImage = UIGraphicsGetImageFromCurrentImageContext()
-                        UIGraphicsEndImageContext()
-                        
-                        let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
-                        let dataProvider = CGDataProviderCreateWithCFData(imageData)
-                        let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
-                        let photoImage = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
-                        
-                        UIGraphicsBeginImageContext(self.previewView.bounds.size)
-                        photoImage.drawInRect(CGRect(origin: CGPointZero, size: self.previewView.bounds.size))
-                        slothImage.drawInRect(CGRectMake(self.slothCALayer.frame.minX, self.slothCALayer.frame.minY, self.slothCALayer.bounds.width, self.slothCALayer.bounds.height))
-                        image = UIGraphicsGetImageFromCurrentImageContext()
-                        UIGraphicsEndImageContext()
-                    } else {
-                        let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
-                        let dataProvider = CGDataProviderCreateWithCFData(imageData)
-                        let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
-                        image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
-                    }
+                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                    let dataProvider = CGDataProviderCreateWithCFData(imageData)
+                    let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+                    let photoImage = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
+                    
+                    UIGraphicsBeginImageContext(self.previewView.bounds.size)
+                    photoImage.drawInRect(CGRect(origin: CGPointZero, size: self.previewView.bounds.size))
+                    slothImage.drawInRect(CGRectMake(self.slothCALayer.frame.minX, self.slothCALayer.frame.minY, self.slothCALayer.bounds.width, self.slothCALayer.bounds.height))
+                    let image = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
                     
                     let imgPath = DataService.instance.saveImageAndCreatePath(image)
                     

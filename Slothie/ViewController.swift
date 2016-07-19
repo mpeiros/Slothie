@@ -8,15 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(takeSlothie))
+        title = "Slothie"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: #selector(showCamera))
+        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor()
         
         DataService.instance.loadSlothies()
     }
@@ -29,44 +30,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func showCamera() {
         performSegueWithIdentifier(SEGUE_SHOW_CAMERA_VC, sender: nil)
-    }
-    
-    func takeSlothie() {
-        let picker = UIImagePickerController()
-        
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-            picker.sourceType = .Camera
-            picker.cameraDevice = .Front
-        } else {
-            picker.sourceType = .PhotoLibrary
-        }
-        
-        picker.delegate = self
-        
-        presentViewController(picker, animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        var newImage: UIImage
-        
-        if let possibleImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            newImage = possibleImage
-        } else {
-            return
-        }
-
-        let imgPath = DataService.instance.saveImageAndCreatePath(newImage)
-        
-        let slothie = Slothie(imagePath: imgPath)
-        DataService.instance.addSlothie(slothie)
-        
-        collectionView.reloadData()
-        
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -87,6 +50,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let slothie = DataService.instance.slothies[indexPath.row]
         
         performSegueWithIdentifier(SEGUE_SHOW_SLOTHIE_VC, sender: slothie)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let width = collectionView.bounds.width / 2.2
+        let height = width * (4 / 3)
+        return CGSizeMake(width, height)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
