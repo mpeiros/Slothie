@@ -24,6 +24,13 @@ class DataService {
         saveSlothies()
     }
     
+    func deleteSlothie(slothie: Slothie) {
+        if let index = _slothies.indexOf(slothie) {
+            _slothies.removeAtIndex(index)
+        }
+        saveSlothies()
+    }
+    
     func saveSlothies() {
         let slothiesData = NSKeyedArchiver.archivedDataWithRootObject(_slothies)
         
