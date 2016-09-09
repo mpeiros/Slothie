@@ -53,7 +53,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let width = collectionView.bounds.width / 2.2
+        let width = (collectionView.bounds.width / 2) - 15
         let height = width * (4 / 3)
         return CGSizeMake(width, height)
     }

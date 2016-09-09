@@ -18,6 +18,7 @@
 		709A70761D2F26F8002B2B4D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A70751D2F26F8002B2B4D /* DataService.swift */; };
 		709A70781D307DF3002B2B4D /* SlothieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A70771D307DF3002B2B4D /* SlothieVC.swift */; };
 		709A707A1D31ABAE002B2B4D /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A70791D31ABAE002B2B4D /* CameraVC.swift */; };
+		709A709C1D3F264A002B2B4D /* SlothieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A709B1D3F264A002B2B4D /* SlothieButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		709A70751D2F26F8002B2B4D /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		709A70771D307DF3002B2B4D /* SlothieVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlothieVC.swift; sourceTree = "<group>"; };
 		709A70791D31ABAE002B2B4D /* CameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
+		709A709B1D3F264A002B2B4D /* SlothieButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlothieButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				709A70611D2EFD3A002B2B4D /* LaunchScreen.storyboard */,
 				709A705C1D2EFD3A002B2B4D /* Main.storyboard */,
 				709A706A1D2EFF7C002B2B4D /* SlothieCell.swift */,
+				709A709B1D3F264A002B2B4D /* SlothieButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				709A707A1D31ABAE002B2B4D /* CameraVC.swift in Sources */,
 				709A705B1D2EFD3A002B2B4D /* ViewController.swift in Sources */,
 				709A70761D2F26F8002B2B4D /* DataService.swift in Sources */,
+				709A709C1D3F264A002B2B4D /* SlothieButton.swift in Sources */,
 				709A706B1D2EFF7C002B2B4D /* SlothieCell.swift in Sources */,
 				709A70591D2EFD3A002B2B4D /* AppDelegate.swift in Sources */,
 			);

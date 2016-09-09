@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cx2-W7-fud">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cx2-W7-fud">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -18,43 +18,98 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfG-fE-nnD">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayb-9D-pGs">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfG-fE-nnD" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
+                                <rect key="frame" x="255" y="502" width="90" height="90"/>
+                                <color key="backgroundColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="1xE-ei-PT7"/>
+                                    <constraint firstAttribute="width" constant="90" id="CeK-S1-ZMt"/>
+                                    <constraint firstAttribute="height" constant="90" id="V5w-RS-bdf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                <state key="normal" title="Take Photo">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="launchSloth">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1xE-ei-PT7"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="didPressTakePhoto:" destination="i1e-7x-Eqe" eventType="touchUpInside" id="vQu-ab-x4N"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayb-9D-pGs">
-                                <rect key="frame" x="0.0" y="64" width="600" height="486"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtA-he-7xQ">
+                                <rect key="frame" x="20" y="10" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="coT-TW-sCO"/>
+                                    <constraint firstAttribute="width" constant="40" id="rDJ-75-PUg"/>
+                                </constraints>
+                                <state key="normal" image="backArrow"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="i1e-7x-Eqe" eventType="touchUpInside" id="ncD-al-aky"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwT-CI-M7W" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
+                                <rect key="frame" x="20" y="517" width="75" height="75"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="mvk-XK-Vnj"/>
+                                    <constraint firstAttribute="height" constant="75" id="zXc-mB-Xlw"/>
+                                </constraints>
+                                <state key="normal" image="checkMark"/>
+                                <connections>
+                                    <action selector="approveButtonPressed:" destination="i1e-7x-Eqe" eventType="touchUpInside" id="LiL-e5-LzC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ha-ZE-vaJ" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
+                                <rect key="frame" x="505" y="517" width="75" height="75"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="AEC-si-eNd"/>
+                                    <constraint firstAttribute="height" constant="75" id="OAa-5h-Evu"/>
+                                </constraints>
+                                <state key="normal" image="letterX"/>
+                                <connections>
+                                    <action selector="declineButtonPressed:" destination="i1e-7x-Eqe" eventType="touchUpInside" id="XB4-VO-2da"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="tfG-fE-nnD" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leading" id="3df-b5-SFu"/>
-                            <constraint firstItem="tfG-fE-nnD" firstAttribute="top" secondItem="ayb-9D-pGs" secondAttribute="bottom" id="Ft6-a1-4Gk"/>
-                            <constraint firstAttribute="trailing" secondItem="tfG-fE-nnD" secondAttribute="trailing" id="G9E-g5-3QD"/>
+                            <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="tfG-fE-nnD" secondAttribute="bottom" constant="8" id="4OP-mM-2zi"/>
+                            <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="JwT-CI-M7W" secondAttribute="bottom" constant="8" id="COX-AF-MSq"/>
+                            <constraint firstItem="ayb-9D-pGs" firstAttribute="top" secondItem="izW-87-Wvz" secondAttribute="topMargin" id="HVe-Dw-Rtn"/>
                             <constraint firstItem="ayb-9D-pGs" firstAttribute="top" secondItem="4bQ-fc-LIJ" secondAttribute="bottom" id="Iat-0U-xIb"/>
                             <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="ayb-9D-pGs" secondAttribute="bottom" id="Qyk-R7-tiY"/>
+                            <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="7ha-ZE-vaJ" secondAttribute="bottom" constant="8" id="S2f-ND-WU3"/>
+                            <constraint firstItem="RtA-he-7xQ" firstAttribute="top" secondItem="4bQ-fc-LIJ" secondAttribute="bottom" constant="10" id="SaM-hS-hhw"/>
+                            <constraint firstItem="tfG-fE-nnD" firstAttribute="centerX" secondItem="izW-87-Wvz" secondAttribute="centerX" id="TM0-CL-FQw"/>
                             <constraint firstAttribute="trailing" secondItem="ayb-9D-pGs" secondAttribute="trailing" id="Vec-CO-WWe"/>
+                            <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="ayb-9D-pGs" secondAttribute="bottom" id="Y4D-gS-pZh"/>
+                            <constraint firstItem="RtA-he-7xQ" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leadingMargin" id="ZZK-DW-isb"/>
                             <constraint firstItem="ayb-9D-pGs" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leading" id="d97-ED-5Bz"/>
-                            <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="tfG-fE-nnD" secondAttribute="bottom" id="h7E-SY-3Iw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7ha-ZE-vaJ" secondAttribute="trailing" id="pIh-vV-V09"/>
+                            <constraint firstItem="JwT-CI-M7W" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leadingMargin" id="qs4-lO-t0T"/>
+                            <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="ayb-9D-pGs" secondAttribute="bottom" id="yK0-Ky-6fD"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Iat-0U-xIb"/>
                                 <exclude reference="Qyk-R7-tiY"/>
+                                <exclude reference="yK0-Ky-6fD"/>
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="approveButton" destination="JwT-CI-M7W" id="FEc-AQ-aA3"/>
+                        <outlet property="backButton" destination="RtA-he-7xQ" id="Ool-p5-TlN"/>
+                        <outlet property="declineButton" destination="7ha-ZE-vaJ" id="pIt-2r-fCR"/>
                         <outlet property="previewView" destination="ayb-9D-pGs" id="AL8-rD-1Gk"/>
+                        <outlet property="takePhotoButton" destination="tfG-fE-nnD" id="ogk-4U-dma"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SfJ-dm-0Va" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -156,7 +211,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gb8-cv-H0d">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gb8-cv-H0d">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </imageView>
                         </subviews>
@@ -200,4 +255,10 @@
             <point key="canvasLocation" x="551" y="1126"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="backArrow" width="300" height="300"/>
+        <image name="checkMark" width="300" height="300"/>
+        <image name="launchSloth" width="300" height="300"/>
+        <image name="letterX" width="300" height="300"/>
+    </resources>
 </document>
