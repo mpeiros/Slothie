@@ -12,7 +12,7 @@ import AVFoundation
 class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureMetadataOutputObjectsDelegate {
 
     @IBOutlet weak var previewView: UIView!
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var backButton: SlothieButton!
     @IBOutlet weak var approveButton: SlothieButton!
     @IBOutlet weak var declineButton: SlothieButton!
     @IBOutlet weak var takePhotoButton: SlothieButton!
@@ -108,7 +108,7 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         flashView = UIView(frame: previewView.bounds)
         flashView.alpha = 0
         flashView.backgroundColor = UIColor.whiteColor()
-        flashView.layer.zPosition = 2
+        flashView.layer.zPosition = 3
         previewView.addSubview(flashView)
     }
     

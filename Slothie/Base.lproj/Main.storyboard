@@ -23,7 +23,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfG-fE-nnD" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
                                 <rect key="frame" x="255" y="502" width="90" height="90"/>
-                                <color key="backgroundColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="1xE-ei-PT7"/>
                                     <constraint firstAttribute="width" constant="90" id="CeK-S1-ZMt"/>
@@ -41,11 +41,12 @@
                                     <action selector="didPressTakePhoto:" destination="i1e-7x-Eqe" eventType="touchUpInside" id="vQu-ab-x4N"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtA-he-7xQ">
-                                <rect key="frame" x="20" y="10" width="40" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtA-he-7xQ" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
+                                <rect key="frame" x="10" y="10" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="coT-TW-sCO"/>
-                                    <constraint firstAttribute="width" constant="40" id="rDJ-75-PUg"/>
+                                    <constraint firstAttribute="height" constant="50" id="coT-TW-sCO"/>
+                                    <constraint firstAttribute="width" constant="50" id="rDJ-75-PUg"/>
                                 </constraints>
                                 <state key="normal" image="backArrow"/>
                                 <connections>
@@ -54,7 +55,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwT-CI-M7W" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
                                 <rect key="frame" x="20" y="517" width="75" height="75"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.29803921568627451" green="0.85098039215686272" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="mvk-XK-Vnj"/>
                                     <constraint firstAttribute="height" constant="75" id="zXc-mB-Xlw"/>
@@ -66,7 +67,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ha-ZE-vaJ" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
                                 <rect key="frame" x="505" y="517" width="75" height="75"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="AEC-si-eNd"/>
                                     <constraint firstAttribute="height" constant="75" id="OAa-5h-Evu"/>
@@ -88,7 +89,7 @@
                             <constraint firstItem="tfG-fE-nnD" firstAttribute="centerX" secondItem="izW-87-Wvz" secondAttribute="centerX" id="TM0-CL-FQw"/>
                             <constraint firstAttribute="trailing" secondItem="ayb-9D-pGs" secondAttribute="trailing" id="Vec-CO-WWe"/>
                             <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="ayb-9D-pGs" secondAttribute="bottom" id="Y4D-gS-pZh"/>
-                            <constraint firstItem="RtA-he-7xQ" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leadingMargin" id="ZZK-DW-isb"/>
+                            <constraint firstItem="RtA-he-7xQ" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leading" constant="10" id="ZZK-DW-isb"/>
                             <constraint firstItem="ayb-9D-pGs" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leading" id="d97-ED-5Bz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7ha-ZE-vaJ" secondAttribute="trailing" id="pIh-vV-V09"/>
                             <constraint firstItem="JwT-CI-M7W" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leadingMargin" id="qs4-lO-t0T"/>
@@ -239,7 +240,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9HC-TT-9V0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.3529411764705882" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

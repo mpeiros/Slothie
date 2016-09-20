@@ -16,6 +16,7 @@ class SlothieButton: UIButton {
         layer.cornerRadius = bounds.width / 2
         layer.borderColor = UIColor.whiteColor().CGColor
         layer.borderWidth = 3
+        layer.zPosition = 2
         clipsToBounds = true
     }
     
