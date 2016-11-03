@@ -21,10 +21,10 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     var stillImageOutput: AVCaptureStillImageOutput?
     var previewLayer: AVCaptureVideoPreviewLayer?
     
-    var slothCALayer: CALayer!
     var metadataOutput: AVCaptureMetadataOutput?
     var sessionQueue: dispatch_queue_t = dispatch_queue_create("videoQueue", DISPATCH_QUEUE_SERIAL)
     
+    var slothCALayer: CALayer!
     var flashView: UIView!
     var slothieImage: UIImage!
     
@@ -39,7 +39,18 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+    
+        setUpCaptureSession()
+        setUpFlashView()
+        setupSlothFace()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.hidden = false
+    }
+    
+    func setUpCaptureSession() {
         captureSession = AVCaptureSession()
         captureSession!.sessionPreset = AVCaptureSessionPresetHigh
         
@@ -74,9 +85,8 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                 previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
                 previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.Portrait
+                previewLayer!.frame = UIScreen.mainScreen().bounds
                 
-                setUpFlashView()
-                setupSlothFace()
                 previewView.layer.addSublayer(previewLayer!)
                 
                 captureSession!.startRunning()
@@ -84,14 +94,28 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        previewLayer!.frame = previewView.bounds
+    func setUpFlashView() {
+        flashView = UIView(frame: previewView.bounds)
+        flashView.alpha = 0
+        flashView.backgroundColor = UIColor.whiteColor()
+        flashView.layer.zPosition = 3
+        previewView.addSubview(flashView)
     }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.hidden = false
+
+    func flashAnimation() {
+        UIView.animateWithDuration(0.1, animations: {
+            self.flashView.alpha = 1
+        }) { _ in
+            self.flashView.alpha = 0
+        }
+    }
+
+    func setupSlothFace() {
+        slothCALayer = CALayer()
+        slothCALayer.zPosition = 1
+        slothCALayer.contents = UIImage(named: "slothFace")!.CGImage
+        slothCALayer.hidden = true
+        previewLayer!.addSublayer(slothCALayer)
     }
     
     func cameraWithPosition(position: AVCaptureDevicePosition) -> AVCaptureDevice {
@@ -102,30 +126,6 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
             }
         }
         return AVCaptureDevice()
-    }
-    
-    func setUpFlashView() {
-        flashView = UIView(frame: previewView.bounds)
-        flashView.alpha = 0
-        flashView.backgroundColor = UIColor.whiteColor()
-        flashView.layer.zPosition = 3
-        previewView.addSubview(flashView)
-    }
-    
-    func flashAnimation() {
-        UIView.animateWithDuration(0.1, animations: {
-            self.flashView.alpha = 1
-        }) { _ in
-            self.flashView.alpha = 0
-        }
-    }
-    
-    func setupSlothFace() {
-        slothCALayer = CALayer()
-        slothCALayer.zPosition = 1
-        slothCALayer.contents = UIImage(named: "slothFace")!.CGImage
-        slothCALayer.hidden = true
-        previewLayer!.addSublayer(slothCALayer)
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
@@ -151,7 +151,7 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
             
             stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(sampleBuffer, error) in
                 
-                if (sampleBuffer != nil) {
+                if (sampleBuffer != nil) && (self.slothCALayer.hidden == false) {
                     
                     self.flashAnimation()
                     
@@ -167,12 +167,12 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
                     
                     let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
                     let dataProvider = CGDataProviderCreateWithCFData(imageData)
-                    let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
-                    let photoImage = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
+                    let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider!, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+                    let photoImage = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.LeftMirrored)
                     
                     UIGraphicsBeginImageContext(self.previewView.bounds.size)
                     photoImage.drawInRect(CGRect(origin: CGPointZero, size: self.previewView.bounds.size))
-                    slothImage.drawInRect(CGRectMake(self.slothCALayer.frame.minX, self.slothCALayer.frame.minY, self.slothCALayer.bounds.width, self.slothCALayer.bounds.height))
+                    slothImage!.drawInRect(CGRectMake(self.slothCALayer.frame.minX, self.slothCALayer.frame.minY, self.slothCALayer.bounds.width, self.slothCALayer.bounds.height))
                     self.slothieImage = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
                     

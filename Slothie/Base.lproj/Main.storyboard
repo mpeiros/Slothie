@@ -129,7 +129,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q2p-rB-lNe">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q2p-rB-lNe">
                                 <rect key="frame" x="0.0" y="74" width="600" height="516"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="O3P-9Q-Phk">
@@ -190,6 +190,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="jRk-y2-i0K"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="collectionView" destination="Q2p-rB-lNe" id="NEO-6W-7wu"/>
                         <segue destination="26K-GX-f6d" kind="show" identifier="ShowSlothieVC" id="7Iq-jL-8EQ"/>
@@ -224,6 +225,7 @@
                             <constraint firstAttribute="trailing" secondItem="Gb8-cv-H0d" secondAttribute="trailing" id="jkv-zh-dyN"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="slothieVCImageView" destination="Gb8-cv-H0d" id="XIe-q7-Zoh"/>
                     </connections>
@@ -237,6 +239,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cx2-W7-fud" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9HC-TT-9V0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
