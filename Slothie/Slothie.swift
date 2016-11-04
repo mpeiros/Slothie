@@ -10,7 +10,7 @@ import UIKit
 
 class Slothie: NSObject, NSCoding {
     
-    private var _slothieImagePath: String!
+    fileprivate var _slothieImagePath: String!
     
     var slothieImagePath: String {
         return _slothieImagePath
@@ -21,11 +21,11 @@ class Slothie: NSObject, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self._slothieImagePath = aDecoder.decodeObjectForKey(KEY_IMAGE_PATH) as! String
+        self._slothieImagePath = aDecoder.decodeObject(forKey: KEY_IMAGE_PATH) as! String
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self._slothieImagePath, forKey: KEY_IMAGE_PATH)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self._slothieImagePath, forKey: KEY_IMAGE_PATH)
     }
 
 }

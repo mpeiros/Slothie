@@ -19,7 +19,7 @@ class SlothieCell: UICollectionViewCell {
         layer.cornerRadius = 3
     }
     
-    func configureCell(slothie: Slothie) {
+    func configureCell(_ slothie: Slothie) {
         slothieImageView.image = DataService.instance.imageForPath(slothie.slothieImagePath)
     }
    

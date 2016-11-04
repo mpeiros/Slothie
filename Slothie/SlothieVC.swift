@@ -18,14 +18,14 @@ class SlothieVC: UIViewController {
         super.viewDidLoad()
         
         title = "Your Slothie"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: #selector(deletePressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deletePressed))
 
         slothieVCImageView.image = DataService.instance.imageForPath(slothieVCSlothie.slothieImagePath)
     }
   
     func deletePressed() {
         DataService.instance.deleteSlothie(slothieVCSlothie)
-        self.navigationController!.popToRootViewControllerAnimated(true)
+        self.navigationController!.popToRootViewController(animated: true)
     }
     
 }

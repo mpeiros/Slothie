@@ -16,29 +16,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         super.viewDidLoad()
         
         title = "Slothie"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: #selector(showCamera))
-        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barStyle = .Black
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showCamera))
+        self.navigationController!.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barStyle = .black
         
         DataService.instance.loadSlothies()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         collectionView.reloadData()
     }
     
     func showCamera() {
-        performSegueWithIdentifier(SEGUE_SHOW_CAMERA_VC, sender: nil)
+        performSegue(withIdentifier: SEGUE_SHOW_CAMERA_VC, sender: nil)
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return DataService.instance.slothies.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SlothieCell", forIndexPath: indexPath) as! SlothieCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SlothieCell", for: indexPath) as! SlothieCell
         
         let slothie = DataService.instance.slothies[indexPath.row]
         
@@ -47,21 +47,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let slothie = DataService.instance.slothies[indexPath.row]
         
-        performSegueWithIdentifier(SEGUE_SHOW_SLOTHIE_VC, sender: slothie)
+        performSegue(withIdentifier: SEGUE_SHOW_SLOTHIE_VC, sender: slothie)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.width / 2) - 15
         let height = width * (4 / 3)
-        return CGSizeMake(width, height)
+        return CGSize(width: width, height: height)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SEGUE_SHOW_SLOTHIE_VC {
-            if let slothieVC = segue.destinationViewController as? SlothieVC {
+            if let slothieVC = segue.destination as? SlothieVC {
                 if let slothie = sender as? Slothie {
                     slothieVC.slothieVCSlothie = slothie
                 }

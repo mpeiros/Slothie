@@ -13,60 +13,60 @@ class DataService {
     
     static let instance = DataService()
     
-    private var _slothies = [Slothie]()
+    fileprivate var _slothies = [Slothie]()
     
     var slothies: [Slothie] {
         return _slothies
     }
     
-    func addSlothie(slothie: Slothie) {
+    func addSlothie(_ slothie: Slothie) {
         _slothies.append(slothie)
         saveSlothies()
     }
     
-    func deleteSlothie(slothie: Slothie) {
-        if let index = _slothies.indexOf(slothie) {
-            _slothies.removeAtIndex(index)
+    func deleteSlothie(_ slothie: Slothie) {
+        if let index = _slothies.index(of: slothie) {
+            _slothies.remove(at: index)
         }
         saveSlothies()
     }
     
     func saveSlothies() {
-        let slothiesData = NSKeyedArchiver.archivedDataWithRootObject(_slothies)
+        let slothiesData = NSKeyedArchiver.archivedData(withRootObject: _slothies)
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(slothiesData, forKey: KEY_SLOTHIES)
+        let defaults = UserDefaults.standard
+        defaults.set(slothiesData, forKey: KEY_SLOTHIES)
     }
     
     func loadSlothies() {
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
-        if let savedSlothies =  defaults.objectForKey(KEY_SLOTHIES) as? NSData {
-            _slothies = NSKeyedUnarchiver.unarchiveObjectWithData(savedSlothies) as! [Slothie]
+        if let savedSlothies =  defaults.object(forKey: KEY_SLOTHIES) as? Data {
+            _slothies = NSKeyedUnarchiver.unarchiveObject(with: savedSlothies) as! [Slothie]
         }
     }
     
-    func saveImageAndCreatePath(image: UIImage) -> String {
-        let imagePath = NSUUID().UUIDString
-        let fullPath = getDocumentsDirectory().stringByAppendingPathComponent(imagePath)
+    func saveImageAndCreatePath(_ image: UIImage) -> String {
+        let imagePath = UUID().uuidString
+        let fullPath = getDocumentsDirectory().appendingPathComponent(imagePath)
         
         if let jpegData = UIImageJPEGRepresentation(image, 80) {
-            jpegData.writeToFile(fullPath, atomically: true)
+            try? jpegData.write(to: URL(fileURLWithPath: fullPath), options: [.atomic])
         }
         
         return imagePath
     }
     
-    func imageForPath(path: String) -> UIImage? {
-        let fullPath = getDocumentsDirectory().stringByAppendingPathComponent(path)
+    func imageForPath(_ path: String) -> UIImage? {
+        let fullPath = getDocumentsDirectory().appendingPathComponent(path)
         let image = UIImage(contentsOfFile: fullPath)
         return image
     }
     
     func getDocumentsDirectory() -> NSString {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
-        return documentsDirectory
+        return documentsDirectory as NSString
     }
     
 }

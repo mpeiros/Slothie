@@ -22,7 +22,7 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     var previewLayer: AVCaptureVideoPreviewLayer?
     
     var metadataOutput: AVCaptureMetadataOutput?
-    var sessionQueue: dispatch_queue_t = dispatch_queue_create("videoQueue", DISPATCH_QUEUE_SERIAL)
+    var sessionQueue: DispatchQueue = DispatchQueue(label: "videoQueue", attributes: [])
     
     var slothCALayer: CALayer!
     var flashView: UIView!
@@ -31,13 +31,13 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.hidden = true
+        navigationController?.navigationBar.isHidden = true
         
-        approveButton.hidden = true
-        declineButton.hidden = true
+        approveButton.isHidden = true
+        declineButton.isHidden = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
         setUpCaptureSession()
@@ -45,16 +45,16 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         setupSlothFace()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.hidden = false
+        navigationController?.navigationBar.isHidden = false
     }
     
     func setUpCaptureSession() {
         captureSession = AVCaptureSession()
         captureSession!.sessionPreset = AVCaptureSessionPresetHigh
         
-        let frontCamera = cameraWithPosition(.Front)
+        let frontCamera = cameraWithPosition(.front)
         
         var error: NSError?
         var input: AVCaptureDeviceInput!
@@ -84,8 +84,8 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
                 
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
                 previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-                previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.Portrait
-                previewLayer!.frame = UIScreen.mainScreen().bounds
+                previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+                previewLayer!.frame = UIScreen.main.bounds
                 
                 previewView.layer.addSublayer(previewLayer!)
                 
@@ -97,82 +97,82 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     func setUpFlashView() {
         flashView = UIView(frame: previewView.bounds)
         flashView.alpha = 0
-        flashView.backgroundColor = UIColor.whiteColor()
+        flashView.backgroundColor = UIColor.white
         flashView.layer.zPosition = 3
         previewView.addSubview(flashView)
     }
 
     func flashAnimation() {
-        UIView.animateWithDuration(0.1, animations: {
+        UIView.animate(withDuration: 0.1, animations: {
             self.flashView.alpha = 1
-        }) { _ in
+        }, completion: { _ in
             self.flashView.alpha = 0
-        }
+        }) 
     }
 
     func setupSlothFace() {
         slothCALayer = CALayer()
         slothCALayer.zPosition = 1
-        slothCALayer.contents = UIImage(named: "slothFace")!.CGImage
-        slothCALayer.hidden = true
+        slothCALayer.contents = UIImage(named: "slothFace")!.cgImage
+        slothCALayer.isHidden = true
         previewLayer!.addSublayer(slothCALayer)
     }
     
-    func cameraWithPosition(position: AVCaptureDevicePosition) -> AVCaptureDevice {
+    func cameraWithPosition(_ position: AVCaptureDevicePosition) -> AVCaptureDevice {
         let devices = AVCaptureDevice.devices()
-        for device in devices {
-            if device.position == position {
+        for device in devices! {
+            if (device as AnyObject).position == position {
                 return device as! AVCaptureDevice
             }
         }
         return AVCaptureDevice()
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
         for metadataObject in metadataObjects as! [AVMetadataObject] {
             
             if metadataObject.type == AVMetadataObjectTypeFace {
                 
-                dispatch_async(dispatch_get_main_queue(), {
-                    let transformedMetadataObject = self.previewLayer!.transformedMetadataObjectForMetadataObject(metadataObject)
+                DispatchQueue.main.async(execute: {
+                    let transformedMetadataObject = self.previewLayer!.transformedMetadataObject(for: metadataObject)
                     let face = transformedMetadataObject!.bounds
                     self.slothCALayer.frame = face
-                    self.slothCALayer.hidden = false
+                    self.slothCALayer.isHidden = false
                 })
             }
         }
     }
     
-    @IBAction func didPressTakePhoto(sender: UIButton) {
-        if let videoConnection = stillImageOutput!.connectionWithMediaType(AVMediaTypeVideo) {
+    @IBAction func didPressTakePhoto(_ sender: UIButton) {
+        if let videoConnection = stillImageOutput!.connection(withMediaType: AVMediaTypeVideo) {
             
-            videoConnection.videoOrientation = AVCaptureVideoOrientation.Portrait
+            videoConnection.videoOrientation = AVCaptureVideoOrientation.portrait
             
-            stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {(sampleBuffer, error) in
+            stillImageOutput?.captureStillImageAsynchronously(from: videoConnection, completionHandler: {(sampleBuffer, error) in
                 
-                if (sampleBuffer != nil) && (self.slothCALayer.hidden == false) {
+                if (sampleBuffer != nil) && (self.slothCALayer.isHidden == false) {
                     
                     self.flashAnimation()
                     
-                    self.takePhotoButton.hidden = true
-                    self.backButton.hidden = true
-                    self.approveButton.hidden = false
-                    self.declineButton.hidden = false
+                    self.takePhotoButton.isHidden = true
+                    self.backButton.isHidden = true
+                    self.approveButton.isHidden = false
+                    self.declineButton.isHidden = false
                     
                     UIGraphicsBeginImageContext(self.slothCALayer.bounds.size)
-                    self.slothCALayer.renderInContext(UIGraphicsGetCurrentContext()!)
+                    self.slothCALayer.render(in: UIGraphicsGetCurrentContext()!)
                     let slothImage = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
                     
                     let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
-                    let dataProvider = CGDataProviderCreateWithCFData(imageData)
-                    let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider!, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
-                    let photoImage = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.LeftMirrored)
+                    let dataProvider = CGDataProvider(data: imageData as! CFData)
+                    let cgImageRef = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
+                    let photoImage = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.leftMirrored)
                     
                     UIGraphicsBeginImageContext(self.previewView.bounds.size)
-                    photoImage.drawInRect(CGRect(origin: CGPointZero, size: self.previewView.bounds.size))
-                    slothImage!.drawInRect(CGRectMake(self.slothCALayer.frame.minX, self.slothCALayer.frame.minY, self.slothCALayer.bounds.width, self.slothCALayer.bounds.height))
+                    photoImage.draw(in: CGRect(origin: CGPoint.zero, size: self.previewView.bounds.size))
+                    slothImage!.draw(in: CGRect(x: self.slothCALayer.frame.minX, y: self.slothCALayer.frame.minY, width: self.slothCALayer.bounds.width, height: self.slothCALayer.bounds.height))
                     self.slothieImage = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
                     
@@ -182,7 +182,7 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         }
     }
     
-    @IBAction func approveButtonPressed(sender: AnyObject) {
+    @IBAction func approveButtonPressed(_ sender: AnyObject) {
         let imgPath = DataService.instance.saveImageAndCreatePath(slothieImage)
         
         let slothieJustTaken = Slothie(imagePath: imgPath)
@@ -191,28 +191,28 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         resetView()
     }
     
-    @IBAction func declineButtonPressed(sender: AnyObject) {
+    @IBAction func declineButtonPressed(_ sender: AnyObject) {
         resetView()
     }
     
-    @IBAction func backButtonPressed(sender: AnyObject) {
+    @IBAction func backButtonPressed(_ sender: AnyObject) {
         captureSession!.stopRunning()
         
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController!.popToRootViewController(animated: true)
     }
     
     func resetView() {
         captureSession!.startRunning()
         
-        slothCALayer.hidden = true
+        slothCALayer.isHidden = true
         
-        takePhotoButton.hidden = false
-        backButton.hidden = false
-        approveButton.hidden = true
-        declineButton.hidden = true
+        takePhotoButton.isHidden = false
+        backButton.isHidden = false
+        approveButton.isHidden = true
+        declineButton.isHidden = true
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
