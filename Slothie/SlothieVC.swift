@@ -28,4 +28,12 @@ class SlothieVC: UIViewController {
         self.navigationController!.popToRootViewController(animated: true)
     }
     
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        if let image = slothieVCImageView.image {
+            let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: [])
+            activityVC.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.addToReadingList, UIActivityType.openInIBooks, UIActivityType.assignToContact, UIActivityType.print ]
+            present(activityVC, animated: true)
+        }
+    }
+    
 }
