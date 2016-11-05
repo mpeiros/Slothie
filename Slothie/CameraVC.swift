@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import JSSAlertView
 
 class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureMetadataOutputObjectsDelegate {
 
@@ -188,11 +189,13 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         let slothieJustTaken = Slothie(imagePath: imgPath)
         DataService.instance.addSlothie(slothieJustTaken)
         
-        resetView()
+        let alert = JSSAlertView().success(self, title: "Slothie saved!")
+        alert.addAction(resetView)
     }
     
     @IBAction func declineButtonPressed(_ sender: AnyObject) {
-        resetView()
+        let alert = JSSAlertView().danger(self, title: "Slothie not saved!")
+        alert.addAction(resetView)
     }
     
     @IBAction func backButtonPressed(_ sender: AnyObject) {

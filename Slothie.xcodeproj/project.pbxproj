@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A57F942BAFF826792E77E2C /* Pods_Slothie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39520506683776C4AD58466C /* Pods_Slothie.framework */; };
 		709A70591D2EFD3A002B2B4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A70581D2EFD3A002B2B4D /* AppDelegate.swift */; };
 		709A705B1D2EFD3A002B2B4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A705A1D2EFD3A002B2B4D /* ViewController.swift */; };
 		709A705E1D2EFD3A002B2B4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 709A705C1D2EFD3A002B2B4D /* Main.storyboard */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		266E38EE8EC42F4D4A2238DE /* Pods-Slothie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slothie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Slothie/Pods-Slothie.release.xcconfig"; sourceTree = "<group>"; };
+		39520506683776C4AD58466C /* Pods_Slothie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Slothie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		709A70551D2EFD3A002B2B4D /* Slothie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slothie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		709A70581D2EFD3A002B2B4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		709A705A1D2EFD3A002B2B4D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		709A70771D307DF3002B2B4D /* SlothieVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlothieVC.swift; sourceTree = "<group>"; };
 		709A70791D31ABAE002B2B4D /* CameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		709A709B1D3F264A002B2B4D /* SlothieButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlothieButton.swift; sourceTree = "<group>"; };
+		F859B5651EF100ABEF8BCCA6 /* Pods-Slothie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slothie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Slothie/Pods-Slothie.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +47,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A57F942BAFF826792E77E2C /* Pods_Slothie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		146D3330EAA4B92609C45428 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				39520506683776C4AD58466C /* Pods_Slothie.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		709A704C1D2EFD39002B2B4D = {
 			isa = PBXGroup;
 			children = (
 				709A70571D2EFD3A002B2B4D /* Slothie */,
 				709A70561D2EFD3A002B2B4D /* Products */,
+				EFA0221FCC825DF20DA51DC6 /* Pods */,
+				146D3330EAA4B92609C45428 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +140,15 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		EFA0221FCC825DF20DA51DC6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F859B5651EF100ABEF8BCCA6 /* Pods-Slothie.debug.xcconfig */,
+				266E38EE8EC42F4D4A2238DE /* Pods-Slothie.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 709A70671D2EFD3A002B2B4D /* Build configuration list for PBXNativeTarget "Slothie" */;
 			buildPhases = (
+				C49F29618FCF0625B5CAC13C /* 📦 Check Pods Manifest.lock */,
 				709A70511D2EFD3A002B2B4D /* Sources */,
 				709A70521D2EFD3A002B2B4D /* Frameworks */,
 				709A70531D2EFD3A002B2B4D /* Resources */,
+				C00D6BB849EEF56D79F09FD3 /* 📦 Embed Pods Frameworks */,
+				7FCCA58E3B2DE9AE4DCB7D9D /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,7 +179,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Max Peiros";
 				TargetAttributes = {
 					709A70541D2EFD3A002B2B4D = {
@@ -192,6 +219,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7FCCA58E3B2DE9AE4DCB7D9D /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Slothie/Pods-Slothie-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C00D6BB849EEF56D79F09FD3 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Slothie/Pods-Slothie-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C49F29618FCF0625B5CAC13C /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		709A70511D2EFD3A002B2B4D /* Sources */ = {
@@ -322,7 +397,9 @@
 		};
 		709A70681D2EFD3A002B2B4D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F859B5651EF100ABEF8BCCA6 /* Pods-Slothie.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Slothie/Info.plist;
@@ -335,7 +412,9 @@
 		};
 		709A70691D2EFD3A002B2B4D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 266E38EE8EC42F4D4A2238DE /* Pods-Slothie.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Slothie/Info.plist;

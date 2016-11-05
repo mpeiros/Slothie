@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JSSAlertView
 
 class SlothieVC: UIViewController {
     
@@ -24,6 +25,11 @@ class SlothieVC: UIViewController {
     }
   
     func deletePressed() {
+        let alert = JSSAlertView().danger(self, title: "Delete this slothie?", buttonText: "Yes", cancelButtonText: "No")
+        alert.addAction(deleteCallback)
+    }
+    
+    func deleteCallback() {
         DataService.instance.deleteSlothie(slothieVCSlothie)
         self.navigationController!.popToRootViewController(animated: true)
     }

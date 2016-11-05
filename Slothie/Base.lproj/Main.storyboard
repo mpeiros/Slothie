@@ -58,7 +58,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwT-CI-M7W" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
-                                <rect key="frame" x="16" y="584" width="75" height="75"/>
+                                <rect key="frame" x="284" y="584" width="75" height="75"/>
                                 <color key="backgroundColor" red="0.29803921568627451" green="0.85098039215686272" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="mvk-XK-Vnj"/>
@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ha-ZE-vaJ" customClass="SlothieButton" customModule="Slothie" customModuleProvider="target">
-                                <rect key="frame" x="284" y="584" width="75" height="75"/>
+                                <rect key="frame" x="16" y="584" width="75" height="75"/>
                                 <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="AEC-si-eNd"/>
@@ -95,8 +95,8 @@
                             <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="ayb-9D-pGs" secondAttribute="bottom" id="Y4D-gS-pZh"/>
                             <constraint firstItem="RtA-he-7xQ" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leading" constant="10" id="ZZK-DW-isb"/>
                             <constraint firstItem="ayb-9D-pGs" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leading" id="d97-ED-5Bz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7ha-ZE-vaJ" secondAttribute="trailing" id="pIh-vV-V09"/>
-                            <constraint firstItem="JwT-CI-M7W" firstAttribute="leading" secondItem="izW-87-Wvz" secondAttribute="leadingMargin" id="qs4-lO-t0T"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="7ha-ZE-vaJ" secondAttribute="leading" id="pIh-vV-V09"/>
+                            <constraint firstItem="JwT-CI-M7W" firstAttribute="trailing" secondItem="izW-87-Wvz" secondAttribute="trailingMargin" id="qs4-lO-t0T"/>
                             <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="ayb-9D-pGs" secondAttribute="bottom" id="yK0-Ky-6fD"/>
                         </constraints>
                         <variation key="default">
