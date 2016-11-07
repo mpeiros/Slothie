@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import JSSAlertView
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -30,7 +32,28 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func showCamera() {
-        performSegue(withIdentifier: SEGUE_SHOW_CAMERA_VC, sender: nil)
+        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
+            performSegue(withIdentifier: SEGUE_SHOW_CAMERA_VC, sender: nil)
+        } else {
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+                if granted {
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: SEGUE_SHOW_CAMERA_VC, sender: nil)
+                    }
+                } else {
+                    let alert = JSSAlertView().info(self, title: "Camera access required! Go to Settings > Slothie > Camera.", buttonText: "Settings", cancelButtonText: "Dismiss")
+                    alert.addAction(self.goToSettings)
+                }
+            })
+        }
+    }
+    
+    func goToSettings() {
+        guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else { return }
+        
+        if UIApplication.shared.canOpenURL(settingsURL) {
+            UIApplication.shared.openURL(settingsURL)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
