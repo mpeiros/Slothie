@@ -22,6 +22,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.navigationController!.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barStyle = .black
         
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(showCamera))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeft)
+        
         DataService.instance.loadSlothies()
     }
     
@@ -56,6 +60,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    // Collection View
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return DataService.instance.slothies.count
     }
@@ -82,6 +87,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return CGSize(width: width, height: height)
     }
     
+    // Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SEGUE_SHOW_SLOTHIE_VC {
             if let slothieVC = segue.destination as? SlothieVC {

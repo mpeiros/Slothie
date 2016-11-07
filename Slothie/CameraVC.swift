@@ -36,6 +36,10 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         
         approveButton.isHidden = true
         declineButton.isHidden = true
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(backButtonPressed(_:)))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
     }
     
     override func viewWillAppear(_ animated: Bool) {

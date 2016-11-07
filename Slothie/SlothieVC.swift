@@ -20,6 +20,14 @@ class SlothieVC: UIViewController {
         
         title = "Your Slothie"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deletePressed))
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonPressed(_:)))
+        swipeUp.direction = UISwipeGestureRecognizerDirection.up
+        self.view.addGestureRecognizer(swipeUp)
 
         slothieVCImageView.image = DataService.instance.imageForPath(slothieVCSlothie.slothieImagePath)
     }
@@ -32,6 +40,10 @@ class SlothieVC: UIViewController {
     func deleteCallback() {
         DataService.instance.deleteSlothie(slothieVCSlothie)
         self.navigationController!.popToRootViewController(animated: true)
+    }
+    
+    func goBack() {
+        navigationController!.popToRootViewController(animated: true)
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
