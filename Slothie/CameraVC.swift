@@ -17,6 +17,7 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     @IBOutlet weak var approveButton: SlothieButton!
     @IBOutlet weak var declineButton: SlothieButton!
     @IBOutlet weak var takePhotoButton: SlothieButton!
+    @IBOutlet weak var saveLabel: SlothieLabel!
     
     var captureSession: AVCaptureSession?
     var stillImageOutput: AVCaptureStillImageOutput?
@@ -36,6 +37,8 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         
         approveButton.isHidden = true
         declineButton.isHidden = true
+        saveLabel.isHidden = true
+        takePhotoButton.alpha = 0.5
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(backButtonPressed(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -144,6 +147,7 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
                     let face = transformedMetadataObject!.bounds
                     self.slothCALayer.frame = face
                     self.slothCALayer.isHidden = false
+                    self.takePhotoButton.alpha = 1.0
                 })
             }
         }
@@ -164,6 +168,7 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
                     self.backButton.isHidden = true
                     self.approveButton.isHidden = false
                     self.declineButton.isHidden = false
+                    self.saveLabel.isHidden = false
                     
                     UIGraphicsBeginImageContext(self.slothCALayer.bounds.size)
                     self.slothCALayer.render(in: UIGraphicsGetCurrentContext()!)
@@ -217,6 +222,8 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         backButton.isHidden = false
         approveButton.isHidden = true
         declineButton.isHidden = true
+        saveLabel.isHidden = true
+        takePhotoButton.alpha = 0.5
     }
     
     override var prefersStatusBarHidden : Bool {

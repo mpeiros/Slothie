@@ -13,6 +13,7 @@ import JSSAlertView
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var headerTextLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +33,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         view.addGestureRecognizer(swipeLeft)
         
         DataService.instance.loadSlothies()
+        
+        setHeaderText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         collectionView.reloadData()
+        setHeaderText()
     }
     
     func showCamera() {
@@ -100,6 +104,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                     slothieVC.slothieVCSlothie = slothie
                 }
             }
+        }
+    }
+    
+    // Header text
+    func setHeaderText() {
+        if DataService.instance.slothies.count == 0 {
+            headerTextLabel.text = "You have no slothies in your collection. Tap the camera button above or swipe left to take a slothie."
+        } else {
+            headerTextLabel.text = "You have \(DataService.instance.slothies.count) slothies in your collection. Tap a slothie to share it with your friends!"
         }
     }
     

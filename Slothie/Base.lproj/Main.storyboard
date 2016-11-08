@@ -81,10 +81,23 @@
                                     <action selector="declineButtonPressed:" destination="i1e-7x-Eqe" eventType="touchUpInside" id="XB4-VO-2da"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="znu-P2-ZJD" customClass="SlothieLabel" customModule="Slothie" customModuleProvider="target">
+                                <rect key="frame" x="143" y="599" width="90" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="9dS-rw-6mB"/>
+                                    <constraint firstAttribute="height" constant="45" id="dla-8Q-1HA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="tfG-fE-nnD" secondAttribute="bottom" constant="8" id="4OP-mM-2zi"/>
+                            <constraint firstItem="znu-P2-ZJD" firstAttribute="centerY" secondItem="7ha-ZE-vaJ" secondAttribute="centerY" id="Afj-Ok-Qfc"/>
                             <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="JwT-CI-M7W" secondAttribute="bottom" constant="8" id="COX-AF-MSq"/>
+                            <constraint firstItem="znu-P2-ZJD" firstAttribute="centerX" secondItem="izW-87-Wvz" secondAttribute="centerX" id="Eep-01-Vxl"/>
                             <constraint firstItem="ayb-9D-pGs" firstAttribute="top" secondItem="izW-87-Wvz" secondAttribute="topMargin" id="HVe-Dw-Rtn"/>
                             <constraint firstItem="ayb-9D-pGs" firstAttribute="top" secondItem="4bQ-fc-LIJ" secondAttribute="bottom" id="Iat-0U-xIb"/>
                             <constraint firstItem="e76-HK-Kca" firstAttribute="top" secondItem="ayb-9D-pGs" secondAttribute="bottom" id="Qyk-R7-tiY"/>
@@ -114,12 +127,13 @@
                         <outlet property="backButton" destination="RtA-he-7xQ" id="Ool-p5-TlN"/>
                         <outlet property="declineButton" destination="7ha-ZE-vaJ" id="pIt-2r-fCR"/>
                         <outlet property="previewView" destination="ayb-9D-pGs" id="AL8-rD-1Gk"/>
+                        <outlet property="saveLabel" destination="znu-P2-ZJD" id="8N2-NY-8jm"/>
                         <outlet property="takePhotoButton" destination="tfG-fE-nnD" id="ogk-4U-dma"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SfJ-dm-0Va" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2079" y="466"/>
+            <point key="canvasLocation" x="2077.5999999999999" y="465.51724137931041"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -134,7 +148,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q2p-rB-lNe">
-                                <rect key="frame" x="0.0" y="74" width="375" height="583"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="543"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="O3P-9Q-Phk">
                                     <size key="itemSize" width="135" height="180"/>
@@ -171,12 +185,22 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="3vU-hx-SWw"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CHZ-nq-Ikd">
+                                <rect key="frame" x="16" y="72" width="343" height="34"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Q2p-rB-lNe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1ap-nS-Z4n"/>
                             <constraint firstItem="Q2p-rB-lNe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="6w5-GK-avL"/>
-                            <constraint firstItem="Q2p-rB-lNe" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="OIT-2p-lAr"/>
+                            <constraint firstItem="CHZ-nq-Ikd" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="AdZ-c6-dgm"/>
+                            <constraint firstItem="Q2p-rB-lNe" firstAttribute="top" secondItem="CHZ-nq-Ikd" secondAttribute="bottom" constant="8" id="CIS-lh-2xo"/>
+                            <constraint firstItem="CHZ-nq-Ikd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="DvC-Yy-lv3"/>
+                            <constraint firstItem="Q2p-rB-lNe" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="OIT-2p-lAr"/>
+                            <constraint firstItem="CHZ-nq-Ikd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Oma-9n-fFa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Q2p-rB-lNe" secondAttribute="bottom" constant="10" id="VcM-8z-88k"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Q2p-rB-lNe" secondAttribute="bottom" id="ZN9-U0-eeB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Q2p-rB-lNe" secondAttribute="trailing" id="f8J-Dd-a2e"/>
@@ -196,13 +220,14 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="collectionView" destination="Q2p-rB-lNe" id="NEO-6W-7wu"/>
+                        <outlet property="headerTextLabel" destination="CHZ-nq-Ikd" id="DT9-Ni-YYD"/>
                         <segue destination="26K-GX-f6d" kind="show" identifier="ShowSlothieVC" id="7Iq-jL-8EQ"/>
                         <segue destination="i1e-7x-Eqe" kind="show" identifier="ShowCameraVC" id="RvE-k3-9qs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1355" y="466"/>
+            <point key="canvasLocation" x="1354.4000000000001" y="465.51724137931041"/>
         </scene>
         <!--SlothieVC-->
         <scene sceneID="Kjo-fT-ZHw">

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A57F942BAFF826792E77E2C /* Pods_Slothie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39520506683776C4AD58466C /* Pods_Slothie.framework */; };
+		701677371DD28CFF0049063D /* SlothieLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701677361DD28CFF0049063D /* SlothieLabel.swift */; };
 		709A70591D2EFD3A002B2B4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A70581D2EFD3A002B2B4D /* AppDelegate.swift */; };
 		709A705B1D2EFD3A002B2B4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A705A1D2EFD3A002B2B4D /* ViewController.swift */; };
 		709A705E1D2EFD3A002B2B4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 709A705C1D2EFD3A002B2B4D /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		266E38EE8EC42F4D4A2238DE /* Pods-Slothie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slothie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Slothie/Pods-Slothie.release.xcconfig"; sourceTree = "<group>"; };
 		39520506683776C4AD58466C /* Pods_Slothie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Slothie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		701677361DD28CFF0049063D /* SlothieLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlothieLabel.swift; sourceTree = "<group>"; };
 		709A70551D2EFD3A002B2B4D /* Slothie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slothie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		709A70581D2EFD3A002B2B4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		709A705A1D2EFD3A002B2B4D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				709A705C1D2EFD3A002B2B4D /* Main.storyboard */,
 				709A706A1D2EFF7C002B2B4D /* SlothieCell.swift */,
 				709A709B1D3F264A002B2B4D /* SlothieButton.swift */,
+				701677361DD28CFF0049063D /* SlothieLabel.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				709A709C1D3F264A002B2B4D /* SlothieButton.swift in Sources */,
 				709A706B1D2EFF7C002B2B4D /* SlothieCell.swift in Sources */,
 				709A70591D2EFD3A002B2B4D /* AppDelegate.swift in Sources */,
+				701677371DD28CFF0049063D /* SlothieLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
