@@ -32,14 +32,14 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.isHidden = true
+        navigationController!.navigationBar.isHidden = true
         
         approveButton.isHidden = true
         declineButton.isHidden = true
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(backButtonPressed(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRight)
+        view.addGestureRecognizer(swipeRight)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +52,7 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
+        navigationController!.navigationBar.isHidden = false
     }
     
     func setUpCaptureSession() {

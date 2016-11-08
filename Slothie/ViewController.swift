@@ -17,14 +17,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Slothie"
+        let titleImage = UIImage(named: "slothieLogo")
+        let titleImageView = UIImageView(image: titleImage)
+        titleImageView.contentMode = .scaleAspectFit
+        
+        navigationItem.titleView = titleImageView
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showCamera))
-        self.navigationController!.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.barStyle = .black
+        
+        navigationController!.navigationBar.tintColor = UIColor.white
+        navigationController!.navigationBar.barStyle = .black
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(showCamera))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeLeft)
+        view.addGestureRecognizer(swipeLeft)
         
         DataService.instance.loadSlothies()
     }

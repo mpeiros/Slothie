@@ -23,11 +23,11 @@ class SlothieVC: UIViewController {
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRight)
+        view.addGestureRecognizer(swipeRight)
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonPressed(_:)))
         swipeUp.direction = UISwipeGestureRecognizerDirection.up
-        self.view.addGestureRecognizer(swipeUp)
+        view.addGestureRecognizer(swipeUp)
 
         slothieVCImageView.image = DataService.instance.imageForPath(slothieVCSlothie.slothieImagePath)
     }
@@ -39,7 +39,7 @@ class SlothieVC: UIViewController {
     
     func deleteCallback() {
         DataService.instance.deleteSlothie(slothieVCSlothie)
-        self.navigationController!.popToRootViewController(animated: true)
+        navigationController!.popToRootViewController(animated: true)
     }
     
     func goBack() {
