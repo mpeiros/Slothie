@@ -27,7 +27,6 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
     var sessionQueue: DispatchQueue = DispatchQueue(label: "videoQueue", attributes: [])
     
     var slothCALayer: CALayer!
-    var flashView: UIView!
     var slothieImage: UIImage!
     
     override func viewDidLoad() {
@@ -49,7 +48,6 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         super.viewWillAppear(animated)
     
         setUpCaptureSession()
-        setUpFlashView()
         setupSlothFace()
     }
     
@@ -102,30 +100,6 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         }
     }
     
-    func setUpFlashView() {
-        flashView = UIView(frame: previewView.bounds)
-        flashView.alpha = 0
-        flashView.backgroundColor = UIColor.white
-        flashView.layer.zPosition = 3
-        previewView.addSubview(flashView)
-    }
-
-    func flashAnimation() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.flashView.alpha = 1
-        }, completion: { _ in
-            self.flashView.alpha = 0
-        }) 
-    }
-
-    func setupSlothFace() {
-        slothCALayer = CALayer()
-        slothCALayer.zPosition = 1
-        slothCALayer.contents = UIImage(named: "slothFace")!.cgImage
-        slothCALayer.isHidden = true
-        previewLayer!.addSublayer(slothCALayer)
-    }
-    
     func cameraWithPosition(_ position: AVCaptureDevicePosition) -> AVCaptureDevice {
         let devices = AVCaptureDevice.devices()
         for device in devices! {
@@ -134,6 +108,14 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
             }
         }
         return AVCaptureDevice()
+    }
+    
+    func setupSlothFace() {
+        slothCALayer = CALayer()
+        slothCALayer.zPosition = 1
+        slothCALayer.contents = UIImage(named: "slothFace")!.cgImage
+        slothCALayer.isHidden = true
+        previewLayer!.addSublayer(slothCALayer)
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
@@ -211,6 +193,21 @@ class CameraVC: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, 
         captureSession!.stopRunning()
         
         navigationController!.popToRootViewController(animated: true)
+    }
+    
+    func flashAnimation() {
+        let flashView = UIView(frame: previewView.bounds)
+        flashView.alpha = 0
+        flashView.backgroundColor = UIColor.white
+        flashView.layer.zPosition = 3
+        previewView.addSubview(flashView)
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            flashView.alpha = 1
+        }, completion: { _ in
+            flashView.alpha = 0
+            flashView.removeFromSuperview()
+        })
     }
     
     func resetView() {

@@ -42,5 +42,7 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera access is required for you to take a slothie!</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photos access is required to save your slothies to your photos library.</string>
 </dict>
 </plist>
